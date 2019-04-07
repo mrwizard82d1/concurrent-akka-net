@@ -1,8 +1,10 @@
 using System;
 using Akka.Actor;
+using MovieStreaming.Messages;
 
 namespace MovieStreaming.Actors
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class PlaybackActor : UntypedActor
     {
         public PlaybackActor()
@@ -12,13 +14,11 @@ namespace MovieStreaming.Actors
         
         protected override void OnReceive(object message)
         {
-            if (message is string)
+            if (message is PlaybackMoveMessage)
             {
-                Console.WriteLine($"Received movie title: \"{message}\".");
-            }
-            else if (message is int)
-            {
-                Console.WriteLine($"Received user ID: {message}.");
+                var typedMessage = (PlaybackMoveMessage) message;
+                Console.WriteLine($"Received movie title: \"{typedMessage.MovieTitle}\".");
+                Console.WriteLine($"Received user ID: \"{typedMessage.UserId    }\".");
             }
             else
             {

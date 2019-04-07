@@ -1,6 +1,7 @@
 ﻿using System;
 using Akka.Actor;
 using MovieStreaming.Actors;
+using MovieStreaming.Messages;
 
 namespace MovieStreaming
 {
@@ -17,9 +18,9 @@ namespace MovieStreaming
             var playbackActorProps = Props.Create<PlaybackActor>();
             var playbackActorRef = _movieStreamingActorSystem.ActorOf(playbackActorProps, "PlaybackActor");
             
+            playbackActorRef.Tell(new PlaybackMoveMessage("Akka.NET: The Moview", 42));
             playbackActorRef.Tell("Akka.NET: The Movie");
             playbackActorRef.Tell(42);
-            playbackActorRef.Tell('c');
             
             Console.WriteLine("Press ENTER to continue...");
             Console.ReadLine();
