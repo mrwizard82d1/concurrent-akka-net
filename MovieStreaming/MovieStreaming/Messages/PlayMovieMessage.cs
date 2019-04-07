@@ -1,8 +1,8 @@
 namespace MovieStreaming.Messages
 {
-    public class PlaybackMoveMessage
+    public class PlayMovieMessage
     {
-        public PlaybackMoveMessage(string movieTitle, int userId)
+        public PlayMovieMessage(string movieTitle, int userId)
         {
             MovieTitle = movieTitle;
             UserId = userId;

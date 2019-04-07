@@ -11,10 +11,10 @@ namespace MovieStreaming.Actors
         {
             Console.WriteLine("Creating a PlaybackActor.");
 
-            Receive<PlaybackMoveMessage>(message => HandlePlaybackMovieMessage(message));
+            Receive<PlayMovieMessage>(message => HandlePlayMovieMessage(message));
         }
 
-        private static void HandlePlaybackMovieMessage(PlaybackMoveMessage message)
+        private static void HandlePlayMovieMessage(PlayMovieMessage message)
         {
             Console.WriteLine($"Received movie title: \"{message.MovieTitle}\".");
             Console.WriteLine($"Received user ID: \"{message.UserId}\".");
