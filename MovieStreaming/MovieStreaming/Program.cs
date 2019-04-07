@@ -23,14 +23,14 @@ namespace MovieStreaming
             playbackActorRef.Tell(new PlayMovieMessage("Boolean Lies", 72));
             playbackActorRef.Tell(new PlayMovieMessage("Codenan the Destroyer", 1));
             
-            Console.WriteLine("Press ENTER to continue...");
-            Console.ReadLine();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
 
             _movieStreamingActorSystem.Terminate().Wait();
             Console.WriteLine("Actor system shutdown.");
             
-            Console.WriteLine("Press ENTER to continue...");
-            Console.ReadLine();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
     }
 }
