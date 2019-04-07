@@ -23,6 +23,8 @@ namespace MovieStreaming
             playbackActorRef.Tell(new PlayMovieMessage("Boolean Lies", 72));
             playbackActorRef.Tell(new PlayMovieMessage("Codenan the Destroyer", 1));
             
+            playbackActorRef.Tell(PoisonPill.Instance);
+            
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
 
