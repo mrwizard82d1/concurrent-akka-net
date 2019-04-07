@@ -28,6 +28,9 @@ namespace MovieStreaming
 
             _movieStreamingActorSystem.Terminate().Wait();
             Console.WriteLine("Actor system shutdown.");
+            
+            Console.WriteLine("Press ENTER to continue...");
+            Console.ReadLine();
         }
     }
 }

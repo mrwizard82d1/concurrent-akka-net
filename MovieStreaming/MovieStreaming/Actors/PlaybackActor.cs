@@ -16,8 +16,7 @@ namespace MovieStreaming.Actors
 
         private static void HandlePlayMovieMessage(PlayMovieMessage message)
         {
-            Console.WriteLine($"Received movie title: \"{message.MovieTitle}\".");
-            Console.WriteLine($"Received user ID: \"{message.UserId}\".");
+            ColorConsole.WriteLineYellow($"Playing movie, \"{message.MovieTitle},\" for user, {message.UserId}.");
         }
     }
 }
