@@ -12,7 +12,19 @@ namespace MovieStreaming.Actors
         
         protected override void OnReceive(object message)
         {
-            throw new System.NotImplementedException();
+            if (message is string)
+            {
+                Console.WriteLine($"Received movie title: \"{message}\".");
+            }
+            else if (message is int)
+            {
+                Console.WriteLine($"Received user ID: {message}.");
+            }
+            else
+            {
+                // Report unhandled message to base class.
+                Unhandled(message);
+            }
         }
     }
 }
