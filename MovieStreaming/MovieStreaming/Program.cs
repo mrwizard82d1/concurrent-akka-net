@@ -14,24 +14,41 @@ namespace MovieStreaming
             _movieStreamingActorSystem = ActorSystem.Create("MovieStreamingActorSystem");
             Console.WriteLine("Actor system created.");
 
-            Console.WriteLine("Creating a PlaybackActor *asynchronously*.");
-            var playbackActorProps = Props.Create<PlaybackActor>();
-            var playbackActorRef = _movieStreamingActorSystem.ActorOf(playbackActorProps, "PlaybackActor");
+            Console.WriteLine("Creating a UserActor *asynchronously*.");
+            var userActorProps = Props.Create<UserActor>();
+            var userActorRef = _movieStreamingActorSystem.ActorOf(userActorProps, "UserActor");
             
-            playbackActorRef.Tell(new PlayMovieMessage("Akka.NET: The Movie", 42));
-            playbackActorRef.Tell(new PlayMovieMessage("Partial Recall", 99));
-            playbackActorRef.Tell(new PlayMovieMessage("Boolean Lies", 72));
-            playbackActorRef.Tell(new PlayMovieMessage("Codenan the Destroyer", 1));
+            Pause();
             
-            playbackActorRef.Tell(PoisonPill.Instance);
-            
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            Console.WriteLine("Sending a PlayMovieMessage (Codenan the Destroyer).");
+            userActorRef.Tell(new PlayMovieMessage("Codenan the Destroyer", 42));
 
+            Pause();
+            
+            Console.WriteLine("Sending another PlayMovieMessage (Boolean Lies).");
+            userActorRef.Tell(new PlayMovieMessage("Boolean Lies", 42));
+            
+            Pause();
+            
+            Console.WriteLine("Sending a StopMovieMessage.");
+            userActorRef.Tell(new StopMovieMessage());
+            
+            Pause();
+            
+            Console.WriteLine("Sending a StopMovieMessage.");
+            userActorRef.Tell(new StopMovieMessage());
+            
+            Pause();
+            
             _movieStreamingActorSystem.Terminate().Wait();
             Console.WriteLine("Actor system shutdown.");
             
-            Console.WriteLine("Press any key to continue...");
+            Pause();
+        }
+
+        private static void Pause(string prompt = "Press any key to continue...")
+        {
+            Console.WriteLine(prompt);
             Console.ReadKey();
         }
     }
