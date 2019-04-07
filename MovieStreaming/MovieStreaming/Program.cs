@@ -19,11 +19,15 @@ namespace MovieStreaming
             var playbackActorRef = _movieStreamingActorSystem.ActorOf(playbackActorProps, "PlaybackActor");
             
             playbackActorRef.Tell(new PlayMovieMessage("Akka.NET: The Movie", 42));
+            playbackActorRef.Tell(new PlayMovieMessage("Partial Recall", 99));
+            playbackActorRef.Tell(new PlayMovieMessage("Boolean Lies", 72));
+            playbackActorRef.Tell(new PlayMovieMessage("Codenan the Destroyer", 1));
             
             Console.WriteLine("Press ENTER to continue...");
             Console.ReadLine();
 
             _movieStreamingActorSystem.Terminate().Wait();
+            Console.WriteLine("Actor system shutdown.");
         }
     }
 }

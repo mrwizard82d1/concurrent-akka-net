@@ -11,7 +11,7 @@ namespace MovieStreaming.Actors
         {
             Console.WriteLine("Creating a PlaybackActor.");
 
-            Receive<PlayMovieMessage>(HandlePlayMovieMessage, message => message.UserId == 42);
+            Receive<PlayMovieMessage>(message => HandlePlayMovieMessage(message));
         }
 
         private static void HandlePlayMovieMessage(PlayMovieMessage message)
