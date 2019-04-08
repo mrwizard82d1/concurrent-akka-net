@@ -7,23 +7,26 @@ namespace MovieStreaming.Actors
     // ReSharper disable once ClassNeverInstantiated.Global
     public class UserActor : ReceiveActor
     {
+        private int _userId;
         private string _currentlyWatching;
         
-        public UserActor()
+        public UserActor(int userId)
         {
+            _userId = userId;
+            
             Console.WriteLine("Creating a UserActor.");
             
-            ColorConsole.WriteLineCyan("Setting initial behavior to Stopped.");
             Stopped();
         }
 
         private void Playing()
         {
-            Receive<PlayMovieMessage>(_ => 
-                ColorConsole.WriteLineRed("Error: cannot start playing a movie before stopping existing one."));
+            Receive<PlayMovieMessage>(_ =>
+                ColorConsole.WriteLineRed(
+                    $"Error: user {_userId} cannot start playing a movie before stopping existing one."));
             Receive<StopMovieMessage>(_ => StopPlayingCurrentMovie());
             
-            ColorConsole.WriteLineCyan("UserActor has now become Playing.");
+            ColorConsole.WriteLineYellow("UserActor has now become Playing.");
             
         }
 
@@ -33,21 +36,21 @@ namespace MovieStreaming.Actors
             Receive<StopMovieMessage>(message =>
                 ColorConsole.WriteLineRed("Error: cannot stop if nothing is playing."));
             
-            ColorConsole.WriteLineCyan("UserActor has now become Stopped.");
+            ColorConsole.WriteLineYellow("UserActor has now become Stopped.");
         }
 
         private void StartPlayingMovie(string movieTitle)
         {
             _currentlyWatching = movieTitle;
             
-            ColorConsole.WriteLineYellow($"User currently watching, \"{movieTitle}\".");
+            ColorConsole.WriteLineYellow($"User {_userId} currently watching, \"{movieTitle}\".");
             
             Become(Playing);
         }
 
         private void StopPlayingCurrentMovie()
         {
-            ColorConsole.WriteLineYellow($"User has stopped watching, \"{_currentlyWatching}\".");
+            ColorConsole.WriteLineYellow($"User {_userId} has stopped watching, \"{_currentlyWatching}\".");
             
             _currentlyWatching = null;
             
@@ -56,23 +59,23 @@ namespace MovieStreaming.Actors
 
         protected override void PreStart()
         {
-            ColorConsole.WriteLineGreen("PlaybackActor PreStart()");
+            ColorConsole.WriteLineYellow($"UserActor {_userId} PreStart()");
         }
 
         protected override void PostStop()
         {
-            ColorConsole.WriteLineGreen("PlaybackActor PostStart()");
+            ColorConsole.WriteLineYellow($"UserActor {_userId} PostStop()");
         }
 
         protected override void PreRestart(Exception reason, object message)
         {
-            ColorConsole.WriteLineGreen($"PlaybackActor Restart(): {reason}.");
+            ColorConsole.WriteLineYellow($"UserActor {_userId} Restart(): {reason}.");
             base.PreRestart(reason, message);
         }
 
         protected override void PostRestart(Exception reason)
         {
-            ColorConsole.WriteLineGreen($"PlaybackActor PostRestart(): {reason}.");
+            ColorConsole.WriteLineYellow($"UserActor {_userId} PostRestart(): {reason}.");
             base.PostRestart(reason);
         }
     }
