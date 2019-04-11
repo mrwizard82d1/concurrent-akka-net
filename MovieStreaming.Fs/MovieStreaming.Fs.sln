@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MovieStreaming.Fs", "MovieStreaming.Fs\MovieStreaming.Fs.fsproj", "{52F1DCC5-8576-42D0-879F-1D659705932F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52F1DCC5-8576-42D0-879F-1D659705932F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52F1DCC5-8576-42D0-879F-1D659705932F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52F1DCC5-8576-42D0-879F-1D659705932F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52F1DCC5-8576-42D0-879F-1D659705932F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
