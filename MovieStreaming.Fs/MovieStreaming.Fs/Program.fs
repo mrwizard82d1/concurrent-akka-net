@@ -11,8 +11,8 @@ let main argv =
     printfn "Actor system, 'MovieStreamingActorSystem,' created."
         
     let actor = playbackActor actorSystem
-    actor <! Hello "Joe"
-    actor <! Goodbye "Joe"
+    actor <! MovieTitle "Akka.NET: The Movie"
+    actor <! UserId 42
     
     printfn "Press ENTER to continue..."
     Console.ReadLine() |> ignore

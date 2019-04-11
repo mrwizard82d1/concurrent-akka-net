@@ -1,7 +1,7 @@
 namespace MovieStreaming.Fs
 
 module Messages = 
-    type GreeterMsg =
-        | Hello of string
-        | Goodbye of string
+    type Playback =
+        | MovieTitle of string
+        | UserId of int
         

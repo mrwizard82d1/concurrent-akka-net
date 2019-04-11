@@ -11,8 +11,8 @@ module Actors =
                 let! msg = mailbox.Receive()
                 
                 match msg with
-                | Hello name -> printfn "Hello, %s" name
-                | Goodbye name -> printfn "Goodbye, %s" name
+                | MovieTitle name -> printfn "Playing movie, \"%s.\"" name
+                | UserId userId -> printfn "User with id, %d" userId
                 
                 return! loop()
             }
