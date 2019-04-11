@@ -8,11 +8,9 @@ module Actors =
         spawn system "playbackActor"
         <| fun mailbox ->
             let rec loop() = actor {
-                let! msg = mailbox.Receive()
+                let! { MovieTitle=movieTitle; UserId=userId } = mailbox.Receive()
                 
-                match msg with
-                | MovieTitle name -> printfn "Playing movie, \"%s.\"" name
-                | UserId userId -> printfn "User with id, %d" userId
+                printfn "Received message to play movie, \"%s,\" for user, %d." movieTitle userId
                 
                 return! loop()
             }
