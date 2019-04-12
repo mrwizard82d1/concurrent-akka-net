@@ -23,6 +23,8 @@ let main argv =
     playbackActorRef.Tell({ MovieTitle="Boolean Lies"; UserId=77 })
     playbackActorRef.Tell({ MovieTitle="Codenan the Destroyer"; UserId=1 })
     
+    playbackActorRef.Tell(PoisonPill.Instance)
+    
     pause (id "Press any key to continue...")
     
     movieStreamingActorSystem.Terminate() |> Async.AwaitTask |> ignore
