@@ -10,8 +10,7 @@ module Actors =
         do printfn "Creating a PlaybackActor."
         
         let handlePlayMovieMessage({ MovieTitle=movieTitle; UserId=userId }) =
-            printfn "Received movie title, \"%s.\"" movieTitle
-            printfn "Received user id: %d." userId
+            printfn "Play movie, \"%s,\" for user %d" movieTitle userId
             
-        do base.Receive<PlayMovieMessage>((fun m -> handlePlayMovieMessage(m)), (fun { UserId=userId } -> userId=42))
+        do base.Receive<PlayMovieMessage>((fun m -> handlePlayMovieMessage(m)))
 
