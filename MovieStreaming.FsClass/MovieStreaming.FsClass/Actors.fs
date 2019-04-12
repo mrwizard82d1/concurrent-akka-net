@@ -18,3 +18,10 @@ module Actors =
         override this.PreStart() = printfnGreen "PlaybackActor PreStart"
         override this.PostStop() = printfnGreen "PlaybackActor PostStop"
 
+        override this.PreRestart(reason, message) =
+            printfnGreen "PlaybackActor PreRestart because %A" reason
+            base.PreRestart(reason, message)
+            
+        override this.PostRestart(reason) =
+            printfnGreen "PlaybackActor PostRestart because %A" reason
+            base.PostRestart(reason)
