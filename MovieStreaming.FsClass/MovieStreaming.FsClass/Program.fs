@@ -13,7 +13,7 @@ let main argv =
     let playbackActorProps = Props.Create<PlaybackActor>()
     let playbackActorRef = movieStreamingActorSystem.ActorOf(playbackActorProps, "PlaybackActor")
     
-    playbackActorRef.Tell({ MovieTitle="Akka.NET: The Movie"; UserId=42 })
+    playbackActorRef.Tell({ MovieTitle="Akka.NET: The Movie"; UserId=43 })
     
     printfn "Press ENTER to continue..."
     Console.ReadLine() |> ignore
