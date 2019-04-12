@@ -3,7 +3,11 @@
 open System
 open Akka.Actor
 
+module Messages =
+    type PlayMovieMessage = { MovieTitle:string; UserId:int }
+    
 module Actors =
+    open Messages
 
     type PlaybackActor() =
         inherit UntypedActor()
@@ -12,8 +16,10 @@ module Actors =
         
         override this.OnReceive(message:obj) =
             match message with
-            | :? string as movieTitle -> printfn "Received movie title, \"%s.\"" movieTitle
-            | :? int as userId -> printfn "Received user id: %d." userId
+            | :? PlayMovieMessage as playMovieMessage ->
+                let { MovieTitle=movieTitle; UserId=userId } = playMovieMessage
+                printfn "Received movie title, \"%s.\"" movieTitle
+                printfn "Received user id: %d." userId
             | _ -> this.Unhandled(message)
             
 
@@ -25,8 +31,7 @@ let main argv =
     let playbackActorProps = Props.Create<Actors.PlaybackActor>()
     let playbackActorRef = movieStreamingActorSystem.ActorOf(playbackActorProps, "PlaybackActor")
     
-    playbackActorRef.Tell("Akka.NET: The Movie")
-    playbackActorRef.Tell(42)
+    playbackActorRef.Tell({ Messages.MovieTitle="Akka.NET: The Movie"; Messages.UserId=42 })
     
     printfn "Press ENTER to continue..."
     Console.ReadLine() |> ignore
