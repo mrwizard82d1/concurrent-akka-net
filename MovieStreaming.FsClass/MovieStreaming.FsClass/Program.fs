@@ -14,6 +14,7 @@ let main argv =
     let movieStreamingActorSystem = ActorSystem.Create("MovieStreamingActorSystem")
     printfn "Actor system created."
     
+    printfn "Asynchronously create actor."
     let playbackActorProps = Props.Create<PlaybackActor>()
     let playbackActorRef = movieStreamingActorSystem.ActorOf(playbackActorProps, "PlaybackActor")
     

@@ -14,4 +14,7 @@ module Actors =
             printfnYellow "Play movie, \"%s,\" for user %d" movieTitle userId
             
         do base.Receive<PlayMovieMessage>((fun m -> handlePlayMovieMessage(m)))
+        
+        override this.PreStart() = printfnGreen "PlaybackActor PreStart"
+        override this.PostStop() = printfnGreen "PlaybackActor PostStop"
 
