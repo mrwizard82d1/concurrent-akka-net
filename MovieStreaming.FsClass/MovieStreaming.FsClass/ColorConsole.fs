@@ -17,4 +17,5 @@ module ColorConsole =
     
     let printfnGreen str = cprintfn ConsoleColor.Green str
     let printfnYellow str = cprintfn ConsoleColor.Yellow str
+    let printfnRed str = cprintfn ConsoleColor.Red str
 

@@ -9,23 +9,38 @@ let pause prompt =
     printfn "%s" (prompt)
     Console.ReadKey() |> ignore
     
+let defaultPause () =
+    pause (id "Press any key to continue...")
+    
+let playMovie movieTitle userId (userActorRef:IActorRef) =
+    defaultPause ()
+    printfn "Sending PlayMovieMessage for movie, \"%s.\"" movieTitle
+    userActorRef.Tell({ MovieTitle=movieTitle; UserId=userId })
+    userActorRef
+    
+let stopMovie (userActorRef:IActorRef) =
+    defaultPause ()
+    printfn "Sending StopMovieMessage for user, 42."
+    userActorRef.Tell(StopMovieMessage ())
+    userActorRef
+    
 [<EntryPoint>]
 let main argv =
     let movieStreamingActorSystem = ActorSystem.Create("MovieStreamingActorSystem")
     printfn "Actor system created."
     
     printfn "Asynchronously create actor."
-    let playbackActorProps = Props.Create<PlaybackActor>()
-    let playbackActorRef = movieStreamingActorSystem.ActorOf(playbackActorProps, "PlaybackActor")
+    let userActorProps = Props.Create<UserActor>()
+    let userActorRef = movieStreamingActorSystem.ActorOf(userActorProps, "UserActor")
     
-    playbackActorRef.Tell({ MovieTitle="Akka.NET: The Movie"; UserId=42 })
-    playbackActorRef.Tell({ MovieTitle="Partial Recall"; UserId=99 })
-    playbackActorRef.Tell({ MovieTitle="Boolean Lies"; UserId=77 })
-    playbackActorRef.Tell({ MovieTitle="Codenan the Destroyer"; UserId=1 })
+    userActorRef
+    |> playMovie "Codenan the Destroyer" 42
+    |> playMovie "Boolean Lies" 42
+    |> stopMovie
+    |> stopMovie
+    |> ignore
     
-    playbackActorRef.Tell(PoisonPill.Instance)
-    
-    pause (id "Press any key to continue...")
+    defaultPause ()
     
     movieStreamingActorSystem.Terminate() |> Async.AwaitTask |> ignore
     pause (id "Actor system shutdown.\nPress any key to continue...")
