@@ -25,6 +25,6 @@ let main argv =
     pause (id "Press any key to continue...")
     
     movieStreamingActorSystem.Terminate() |> Async.AwaitTask |> ignore
-    pause (id "Press any key to continue...")
+    pause (id "Actor system shutdown.\nPress any key to continue...")
     
     0 // return an integer exit code
